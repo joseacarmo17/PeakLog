@@ -1,0 +1,18 @@
+components:
+  schemas:
+    UsuarioDto:
+      type: object
+      properties:
+        id:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+        nombre:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+        email:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+    UsuarioListDto:
+        type: object
+        properties:
+            usuarios:
+            type: array
+            items:
+                $ref: '#/components/schemas/UsuarioDto'

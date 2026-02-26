@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: PeakLog API
+  version: 1.0.1
+  description: API REST para PeakLog
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: AuthController
+    description: Endpoints for user authentication and registration
+  - name: UsuarioController
+    description: Endpoints for managing users
+
+paths:
+  /auth/register:
+    $ref: './auth/register.yml'
+  /auth/login:
+    $ref: './auth/login.yml'
+  /usuarios:
+    $ref: './usuarios/findAllUsers.yml'
+  /usuarios/{id}:
+    $ref: './usuarios/findUserById.yml'
