@@ -8,6 +8,7 @@ import org.peaklog.model.dto.CreateUserDTO;
 import org.peaklog.model.dto.LoginDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Tag(name = "AuthController")
@@ -18,12 +19,12 @@ public interface AuthControllerApi {
             @ApiResponse(responseCode = "201", description = "Created")
     })
     @PostMapping("/register")
-    ResponseEntity<String> register(CreateUserDTO createUserDTO);
+    ResponseEntity<String> register(@RequestBody CreateUserDTO createUserDTO);
 
     @Operation(summary = "Login with user credentials")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Ok")
     })
     @PostMapping("/login")
-    ResponseEntity<String> login(LoginDTO loginDTO);
+    ResponseEntity<String> login(@RequestBody LoginDTO loginDTO);
 }

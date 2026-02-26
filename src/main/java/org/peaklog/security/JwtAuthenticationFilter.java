@@ -31,18 +31,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String token = header.substring(7);
-        String login = jwtService.extractLogin(token);
+        try {
+            String token = header.substring(7);
+            String login = jwtService.extractLogin(token);
 
-        var usuario = usuarioRepository.findByLogin(login);
+            var usuario = usuarioRepository.findByLogin(login);
 
-        if (usuario.isPresent()) {
-            var auth = new UsernamePasswordAuthenticationToken(
-                    login,
-                    null,
-                    null
-            );
-            SecurityContextHolder.getContext().setAuthentication(auth);
+            if (usuario.isPresent()) {
+                var auth = new UsernamePasswordAuthenticationToken(
+                        login,
+                        null,
+                        null
+                );
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+
+        } catch (Exception e) {
+            // Si el token es inválido, simplemente no autenticamos
+            SecurityContextHolder.clearContext();
         }
 
         filterChain.doFilter(request, response);

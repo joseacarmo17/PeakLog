@@ -22,8 +22,10 @@ public class AuthController implements AuthControllerApi {
     @Override
     public ResponseEntity<String> register(CreateUserDTO createUserDTO) {
         Usuario user = new Usuario();
+        user.setLogin(createUserDTO.getLogin());
         user.setNombre(createUserDTO.getNombre());
         user.setFechaNacimiento(createUserDTO.getBirthDate());
+        user.setEmail(createUserDTO.getEmail());
         user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
         usuarioRepository.save(user);
 
