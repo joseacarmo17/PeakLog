@@ -1,4 +1,4 @@
-package org.peaklog.model;
+package org.peaklog.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;
