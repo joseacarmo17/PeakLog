@@ -1,55 +1,53 @@
 package org.peaklog.model.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(
-        name = "usuarios",
-        schema = "auth",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "login"),
-                @UniqueConstraint(columnNames = "email")
-        }
-)
-@Getter
-@Setter
+@Table(name = "usuarios", schema = "auth")
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String login;
 
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private LocalDate fechaNacimiento;
 
-    /**
-     * Se almacena SIEMPRE hasheada (BCrypt).
-     * Nunca en texto plano.
-     */
     @Column(nullable = false)
-    private String password;
+    private String password; // Siempre hasheada (BCrypt)
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @PrePersist
-    public void prePersist() {
-        this.createdAt = LocalDateTime.now();
+    void prePersist() {
+        createdAt = LocalDateTime.now();
     }
 }
