@@ -1,0 +1,16 @@
+components:
+  schemas:
+    Integer32:
+      title: Integer format 32
+      type: integer
+      format: int32
+      example: 12345
+    Integer64:
+      title: Integer format 64
+      type: integer
+      format: int64
+      example: 54321
+    String:
+      title: String
+      type: string
+      example: "aA-1-0?"

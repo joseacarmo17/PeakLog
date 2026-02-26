@@ -1,0 +1,26 @@
+get:
+  tags: 
+    - UsuarioController
+  summary: Obtiene todos los usuarios
+  description: Obtiene todos los usuarios
+  operationId: findAllUsers
+  parameters: 
+    - name: idUsuario
+      description: id del usuario
+      in: path
+      required: true
+      schema:
+        $ref: '../common-schemas.yml#/components/schemas/String'
+  responses:
+    '200':
+      description: Lista de usuarios
+      content:
+        application/json:
+          schema:
+              $ref: 'usuarios-schemas.yml#/components/schemas/UsuarioListDto'
+    '400':
+      $ref: '../common-responses.yml#/components/responses/400'
+    '404':
+      $ref: '../common-responses.yml#/components/responses/404'
+    '500':
+      $ref: '../common-responses.yml#/components/responses/500'

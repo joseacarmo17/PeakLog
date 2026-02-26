@@ -1,4 +1,4 @@
-package org.peaklog.security;
+package org.peaklog.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

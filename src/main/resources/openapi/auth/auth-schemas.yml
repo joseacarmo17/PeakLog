@@ -1,0 +1,23 @@
+components:
+  schemas:
+    CreateUserDto:
+      type: object
+      properties:
+        login:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+        name:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+        birthDate:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+        email:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+        password:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+
+    LoginDto:
+      type: object
+      properties:
+        login:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+        password:
+          $ref: '../common-schemas.yml#/components/schemas/String'

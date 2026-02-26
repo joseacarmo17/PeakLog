@@ -1,0 +1,14 @@
+components:
+  responses:
+    '201':
+      description: Created
+    '202':
+      description: Accepted
+    '204':
+      description: No Content - OK
+    '400':
+      description: Bad Request
+    '404':
+      description: Not Found
+    '500':
+      description: Internal Server Error

@@ -1,4 +1,4 @@
-package org.peaklog.security;
+package org.peaklog.config.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
