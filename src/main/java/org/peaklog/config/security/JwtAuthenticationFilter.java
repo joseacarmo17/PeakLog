@@ -3,7 +3,7 @@ package org.peaklog.config.security;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import lombok.RequiredArgsConstructor;
-import org.peaklog.repository.UsuarioRepository;
+import org.peaklog.repository.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = header.substring(7);
             String login = jwtService.extractLogin(token);
 
-            var usuario = usuarioRepository.findByLogin(login);
+            var usuario = userRepository.findByLogin(login);
 
             if (usuario.isPresent()) {
                 var auth = new UsernamePasswordAuthenticationToken(

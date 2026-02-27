@@ -22,4 +22,5 @@ server:
 
 jwt:
   secret: ${JWT_SECRET}
-  expiration: 3600000
+  access-expiration: 900000
+  refresh-expiration: 28800000

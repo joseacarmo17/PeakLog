@@ -17,12 +17,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "usuarios", schema = "auth")
+@Table(name = "users", schema = "auth")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +32,13 @@ public class Usuario {
     private String login;
 
     @Column(nullable = false)
-    private String nombre;
+    private String name;
 
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private LocalDate fechaNacimiento;
+    private LocalDate birthDate;
 
     @Column(nullable = false)
     private String password; // Siempre hasheada (BCrypt)
