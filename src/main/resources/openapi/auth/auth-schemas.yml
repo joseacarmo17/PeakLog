@@ -13,8 +13,14 @@ components:
           $ref: '../common-schemas.yml#/components/schemas/String'
         password:
           $ref: '../common-schemas.yml#/components/schemas/String'
-
     LoginDto:
+      type: object
+      properties:
+        login:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+        password:
+          $ref: '../common-schemas.yml#/components/schemas/String'
+    RefreshTokenDto:
       type: object
       properties:
         login:

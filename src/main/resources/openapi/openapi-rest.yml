@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: PeakLog API
-  version: 1.0.1
+  version: 1.0.2
   description: API REST para PeakLog
 
 security:
@@ -10,7 +10,7 @@ security:
 tags:
   - name: AuthController
     description: Endpoints for user authentication and registration
-  - name: UsuarioController
+  - name: UserController
     description: Endpoints for managing users
 
 paths:
@@ -18,6 +18,8 @@ paths:
     $ref: './auth/register.yml'
   /auth/login:
     $ref: './auth/login.yml'
+  /auth/refresh:
+    $ref: './auth/refresh-token.yml'
   /usuarios:
     $ref: './usuarios/findAllUsers.yml'
   /usuarios/{id}:

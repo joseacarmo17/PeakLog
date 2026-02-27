@@ -1,6 +1,6 @@
 get:
   tags: 
-    - UsuarioController
+    - UserController
   summary: Obtiene la informacion de un usuario
   description: Obtiene la informacion de un usuario
   operationId: findUserById

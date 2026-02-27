@@ -1,6 +1,6 @@
 get:
   tags: 
-    - UsuarioController
+    - UserController
   summary: Obtiene todos los usuarios
   description: Obtiene todos los usuarios
   operationId: findAllUsers
