@@ -10,7 +10,7 @@ get:
       in: path
       required: true
       schema:
-        $ref: '../common-schemas.yml#/components/schemas/String'
+        $ref: '../common-schemas.yml#/components/schemas/Integer32'
   responses:
     '200':
       description: Lista de usuarios
