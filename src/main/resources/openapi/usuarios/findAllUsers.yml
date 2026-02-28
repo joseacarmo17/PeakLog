@@ -4,13 +4,6 @@ get:
   summary: Obtiene todos los usuarios
   description: Obtiene todos los usuarios
   operationId: findAllUsers
-  parameters: 
-    - name: idUsuario
-      description: id del usuario
-      in: path
-      required: true
-      schema:
-        $ref: '../common-schemas.yml#/components/schemas/String'
   responses:
     '200':
       description: Lista de usuarios

@@ -5,10 +5,9 @@ import org.peaklog.model.dto.LoginDto;
 
 public interface AuthService {
 
-    void register(CreateUserDto createUserDTO);
+  void register(CreateUserDto createUserDTO);
 
-    String login(LoginDto loginDTO);
+  String login(LoginDto loginDTO);
 
-    String refreshToken(String token);
-
+  String refreshToken(String token);
 }

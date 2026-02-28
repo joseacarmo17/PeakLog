@@ -13,25 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController implements AuthControllerApi {
 
-    private final AuthService authService;
+  private final AuthService authService;
 
-    @Override
-    public ResponseEntity<Void> register(CreateUserDto createUserDTO) {
-        this.authService.register(createUserDTO);
+  @Override
+  public ResponseEntity<Void> register(CreateUserDto createUserDTO) {
+    this.authService.register(createUserDTO);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+    return new ResponseEntity<>(HttpStatus.CREATED);
+  }
 
-    @Override
-    public ResponseEntity<String> login(LoginDto loginDTO) {
+  @Override
+  public ResponseEntity<String> login(LoginDto loginDTO) {
 
-        return ResponseEntity.ok(this.authService.login(loginDTO));
-    }
+    return ResponseEntity.ok(this.authService.login(loginDTO));
+  }
 
-    public ResponseEntity<String> refreshToken(String token) {
+  public ResponseEntity<String> refreshToken(String token) {
 
-        return this.authService.refreshToken(token) != null
-                ? ResponseEntity.ok(this.authService.refreshToken(token))
-                : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
+    return this.authService.refreshToken(token) != null
+        ? ResponseEntity.ok(this.authService.refreshToken(token))
+        : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+  }
 }
