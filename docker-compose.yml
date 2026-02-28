@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres:15
+    container_name: peaklog-db
+    restart: always
+    env_file:
+        - .env
+    environment:
+      POSTGRES_DB: peaklog
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: peaklog-app
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/peaklog
+      SPRING_DATASOURCE_USERNAME: ${DATABASE_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASS}
+      JWT_SECRET: ${JWT_SECRET}
+
+volumes:
+  postgres_data:
