@@ -2,6 +2,8 @@ package org.peaklog.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.peaklog.config.security.JwtService;
+import org.peaklog.exception.ErrorCode;
+import org.peaklog.exception.ServiceException;
 import org.peaklog.model.dto.CreateUserDto;
 import org.peaklog.model.dto.LoginDto;
 import org.peaklog.model.entity.User;
@@ -23,13 +25,18 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void register(CreateUserDto createUserDTO) {
-        User user = new User();
-        user.setLogin(createUserDTO.getLogin());
-        user.setName(createUserDTO.getName());
-        user.setBirthDate(LocalDate.parse(createUserDTO.getBirthDate()));
-        user.setEmail(createUserDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
-        userRepository.save(user);
+        try {
+            User user = new User();
+            user.setLogin(createUserDTO.getLogin());
+            user.setName(createUserDTO.getName());
+            user.setBirthDate(LocalDate.parse(createUserDTO.getBirthDate()));
+            user.setEmail(createUserDTO.getEmail());
+            user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
+            userRepository.save(user);
+        }catch (Exception e){
+            throw new ServiceException(ErrorCode.INTERNAL_ERROR, e.getMessage());
+        }
+
     }
 
     @Override
@@ -38,12 +45,12 @@ public class AuthServiceImpl implements AuthService {
 
         if (usuario.isPresent()){
             if (!passwordEncoder.matches(loginDTO.getPassword(), usuario.get().getPassword())) {
-                throw new RuntimeException("Credenciales incorrectas");
+                throw new ServiceException(ErrorCode.INVALID_CREDENTIALS);
             }
             return jwtService.generateAccessToken(usuario.get().getLogin());
         }
         else{
-            throw new RuntimeException("Usuario no encontrado");
+            throw new ServiceException(ErrorCode.USER_NOT_FOUND);
         }
 
 
@@ -55,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
             String accessToken = token.substring(7);
 
             if (!jwtService.isRefreshTokenValid(accessToken)) {
-                throw new RuntimeException("Refresh token inválido o expirado");
+                throw new ServiceException(ErrorCode.TOKEN_INVALID);
             }
 
             String login = jwtService.extractLogin(accessToken);
@@ -65,7 +72,7 @@ public class AuthServiceImpl implements AuthService {
             return refreshToken;
 
         } catch (Exception e) {
-            throw new RuntimeException("Refresh token inválido o expirado");
+            throw new ServiceException(ErrorCode.TOKEN_INVALID);
         }
     }
 }
