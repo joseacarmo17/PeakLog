@@ -1,7 +1,5 @@
 package org.peaklog.service.impl;
 
-import java.time.LocalDate;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.peaklog.config.security.JwtService;
 import org.peaklog.exception.ErrorCode;
@@ -13,6 +11,9 @@ import org.peaklog.repository.UserRepository;
 import org.peaklog.service.AuthService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -56,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
     try {
       String accessToken = token.substring(7);
 
-      if (!jwtService.isRefreshTokenValid(accessToken)) {
+      if (!jwtService.isRefreshToken(accessToken)) {
         throw new ServiceException(ErrorCode.TOKEN_INVALID);
       }
 
