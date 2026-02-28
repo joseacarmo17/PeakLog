@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/peaklog
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASS}
+
+  sql:
+    init:
+      mode: never
