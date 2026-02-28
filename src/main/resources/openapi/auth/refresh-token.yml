@@ -1,0 +1,25 @@
+post:
+  tags:
+    - AuthController
+  summary: refresh token
+  operationId: refreshToken
+  parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Refresh token del usuario
+      schema:
+        type: string
+  responses:
+    '200':
+      description: token de autenticacion
+      content:
+        application/json:
+          schema:
+            $ref: '../common-schemas.yml#/components/schemas/String'
+    '400':
+      $ref: '../common-responses.yml#/components/responses/400'
+    '404':
+      $ref: '../common-responses.yml#/components/responses/404'
+    '500':
+      $ref: '../common-responses.yml#/components/responses/500'

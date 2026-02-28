@@ -1,0 +1,20 @@
+post:
+  tags:
+    - AuthController
+  summary: Register new user
+  operationId: register
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'auth-schemas.yml#/components/schemas/CreateUserDto'
+  responses:
+    '201':
+      $ref: '../common-responses.yml#/components/responses/201'
+    '400':
+      $ref: '../common-responses.yml#/components/responses/400'
+    '404':
+      $ref: '../common-responses.yml#/components/responses/404'
+    '500':
+      $ref: '../common-responses.yml#/components/responses/500'

@@ -1,0 +1,24 @@
+post:
+  tags:
+    - AuthController
+  summary: login
+  operationId: login
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'auth-schemas.yml#/components/schemas/LoginDto'
+  responses:
+    '200':
+      description: token de autenticacion
+      content:
+        application/json:
+          schema:
+              $ref: '../common-schemas.yml#/components/schemas/String'
+    '400':
+      $ref: '../common-responses.yml#/components/responses/400'
+    '404':
+      $ref: '../common-responses.yml#/components/responses/404'
+    '500':
+      $ref: '../common-responses.yml#/components/responses/500'
