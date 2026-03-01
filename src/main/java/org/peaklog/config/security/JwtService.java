@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.time.Instant;
 import java.util.Date;
 
 @Service
@@ -24,8 +25,8 @@ public class JwtService {
     public String generateAccessToken(String login) {
         return Jwts.builder()
                 .setSubject(login)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtProperties.getAccessExpiration()))
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(Instant.now().plusMillis(jwtProperties.getAccessExpiration())))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -34,8 +35,8 @@ public class JwtService {
         return Jwts.builder()
                 .setSubject(login)
                 .claim("type", "refresh")
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtProperties.getRefreshExpiration()))
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(Instant.now().plusMillis(jwtProperties.getRefreshExpiration())))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

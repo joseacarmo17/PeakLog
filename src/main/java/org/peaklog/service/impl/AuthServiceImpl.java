@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
     try {
       String accessToken = token.substring(7);
 
-      if (jwtService.isTokenExpired(accessToken)) {
+       if (jwtService.isTokenExpired(accessToken)) {
         throw new ServiceException(ErrorCode.TOKEN_INVALID);
       }
 
