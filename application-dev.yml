@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://db:5432/peaklog
+    url: jdbc:postgresql://localhost:5433/peaklog
     username: ${DATABASE_USER}
     password: ${DATABASE_PASS}
-
-  sql:
-    init:
-      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

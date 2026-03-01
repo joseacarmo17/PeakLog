@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peaklog-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: peaklog
+  template:
+    metadata:
+      labels:
+        app: peaklog
+    spec:
+      containers:
+        - name: peaklog
+          image: joseacarmo17/peaklog:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: pro
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: peaklog-secret
+                  key: JWT_SECRET
+
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-service:5432/peaklog
+
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: peaklog-secret
+                  key: SPRING_DATASOURCE_USERNAME
+
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: peaklog-secret
+                  key: SPRING_DATASOURCE_PASSWORD
