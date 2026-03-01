@@ -30,8 +30,6 @@ public class AuthController implements AuthControllerApi {
 
   public ResponseEntity<String> refreshToken(String token) {
 
-    return this.authService.refreshToken(token) != null
-        ? ResponseEntity.ok(this.authService.refreshToken(token))
-        : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    return ResponseEntity.ok(this.authService.refreshToken(token));
   }
 }
